@@ -14,6 +14,9 @@ void display();
 void add_last(int data);
 int count_nodes();
 void add_at_pos(int data,int pos);
+void delete_first();
+void delete_last();
+void delete_at_pos(int pos);
 
 int main()
 {
@@ -36,6 +39,15 @@ int main()
     add_at_pos(35,5); // invalid
     // head->60->40->30->20->35->10->50->80
     display();
+    delete_first();
+    display();
+    // // head->40->30->20->35->10->50->80
+    delete_last();
+    display();
+    // head->40->30->20->35->10->50
+    delete_at_pos(4);
+    display();
+    // head->40->30->20->10->50
     return 0;
 }
 
@@ -162,4 +174,84 @@ int count_nodes()
         }
     }
     return count;
+}
+
+void delete_first()
+{
+    if(head == NULL)
+    {
+        printf("List Is Empty !\n");
+    }
+    else if(head->next == NULL)
+    {
+        // if the list comtains only one node
+        free(head);
+        head = NULL;
+    }
+    else
+    {
+        // if the list contains multiple nodes
+        struct node *temp = head;
+        head = head->next;
+        free(temp);
+        temp = NULL; 
+    }
+}
+
+void delete_last()
+{
+    if(head == NULL)
+        printf("Empty !");
+    else if(head->next == NULL)
+    {
+        free(head);
+        head = NULL;
+    }
+    else
+    {
+        struct node *trav = head;
+        // traverse till second last node
+        while(trav->next->next != NULL)
+        {
+            trav = trav->next;
+        }
+        free(trav->next);
+        trav->next = NULL;
+    }
+}
+
+void delete_at_pos(int pos)
+{
+    if(head == NULL)
+        printf("List is Empty !");
+    else if(pos == 1)
+        delete_first();
+    else if(pos == count_nodes())
+        delete_last();
+    else if( pos < 1 || pos > count_nodes())
+    {
+        printf("Invalid !\n");
+    }
+    else
+    {
+        struct node *trav = head;
+        for(int i =1; i<pos -1; i++)
+        {
+            trav = trav->next; // traverse till pos-1
+        }
+        // backup of pos node
+        struct node *temp = trav->next;
+        
+        // link between pos-1 and pos+1
+            trav->next = temp->next;
+            // trav->next = trav->next->next;
+
+            free(temp);
+            temp = NULL;
+
+
+
+    }
+    
+    
 }
