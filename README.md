@@ -78,4 +78,4 @@
         By progressing through the repository, users can gain a strong foundation, build advanced skills, and apply their learning to real-world projects.
     </p>
 
-<h2>Developed by: Yash Anand</h2>
+<h2>Developed by: Yash Anand </h2>
